@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Library Project</title>
+    <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
+</head>
+
+<body>
+
+    <header class="header__container">
+        <h2>Search titles</h2>
+
+        <form id="searchForm" class="search__container">
+
+            <label for="search">
+                <input id="searchInput" class="search__input" type="text" name="search" placeholder="Type in a title"
+                    required>
+            </label>
+            <p id="warning" class="warning display-n">Type at least 3 letters</p>
+        </form>
+
+        <section>
+            <button id="searchBtn" class="search__button">Search</button>
+            <button id="resetBtn" class="reset__button">Reset</button>
+        </section>
+    </header>
+
+    <aside>
+        <h2>Browse by</h2>
+        <section class="category__container">
+            <button id="alph" class="category__button">Titles alphabetically</button>
+            <button id="chron" class="category__button">Titles chronologically</button>
+            <button id="cat" class="category__button">Categories</button>
+        </section>
+    </aside>
+
+    <main class="main__container">
+        <h2>Library</h2>
+
+        <ul id="library" class="book__container"></ul>
+
+    </main>
+
+    <script src="./js/app.js"></script>
+</body>
+
+</html>

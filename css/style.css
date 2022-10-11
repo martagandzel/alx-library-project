@@ -1,0 +1,185 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #fffafa;
+    margin: 0 auto;
+    width: 75vw;
+    min-height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+}
+
+h2 {
+    font-size: 2rem;
+    padding: 2rem 0;
+}
+
+.header__container {
+    display: flex;
+    justify-content: space-between;
+    margin: 6rem auto 1%;
+}
+
+.header__container h2 {
+    position: absolute;
+    top: 0;
+}
+
+.search__input {
+    background-color: #fff;
+    padding: 1rem;
+    margin: .5rem 0;
+    width: 35rem;
+    border: 1px solid #c0c0c0;
+    font-family: inherit;
+    font-size: 1.25rem;
+}
+
+.search__input:active,
+.search__input:focus {
+    border: none;
+}
+
+.search__button,
+.reset__button {
+    background-color: #fff;
+    width: 7rem;
+    padding: 1rem;
+    margin: .5rem 0;
+    border: 1px solid #c0c0c0;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1.25rem;
+}
+
+.warning {
+    color: #f50000;
+}
+
+.display-n {
+    display: none;
+}
+
+.category__container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.category__button {
+    background-color: #c0c0c0;
+    padding: 1rem;
+    margin: .5rem 0;
+    width: 33%;
+    border: 1px solid #c0c0c0;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1.25rem;
+}
+
+.book__container {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.book__item {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: .5rem .5rem;
+}
+
+.book__img {
+    width: 10rem;
+    border: 1px solid #c0c0c0;
+    border-radius: 1rem;
+}
+
+.book_details {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.book_details p {
+    margin-bottom: .5rem;
+    text-align: center;
+}
+
+.book__title {
+    font-size: 1.25rem;
+}
+
+.book__author,
+.book__cat,
+.book__pubyear {
+    font-weight: 600;
+}
+
+.book_details p:nth-child(3),
+.book_details p:nth-child(4) {
+    font-size: small;
+    color: #696969;
+}
+
+@media (max-width: 1050px) {
+    .search__input {
+        width: 25rem;
+    }
+
+    .book__container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .header__container {
+        display: block;
+    }
+
+}
+
+@media (max-width: 836px) {
+    .search__input {
+        width: 20rem;
+    }
+
+    .book__container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 730px) {
+
+    .search__input {
+        width: 100%;
+    }
+
+    .header__container {
+        display: block;
+    }
+
+    .category__container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .category__button {
+        width: 100%;
+    }
+
+    .book__container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 390px) {
+    .book__container {
+        grid-template-columns: 1fr;
+    }
+}

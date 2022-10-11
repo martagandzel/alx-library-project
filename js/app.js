@@ -290,7 +290,7 @@ const showLibrary = (collection) => {
     })
 }
 
-// reading and validatin input, then filtering the library view
+// reading and validating input, then filtering the library view
 const handleSearch = (event) => {
     event.preventDefault();
 

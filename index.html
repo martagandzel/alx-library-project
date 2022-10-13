@@ -23,10 +23,10 @@
         <form id="searchForm" class="search__container">
 
             <label for="search">
-                <input id="searchInput" class="search__input" type="text" name="search" placeholder="Type in a title"
+                <input id="search" class="search__input" type="text" name="search" placeholder="Type in a title"
                     required>
             </label>
-            <p id="warning" class="warning display-n">Type at least 3 letters</p>
+            <p id="warning-search" class="warning display-n">Type at least 3 letters</p>
         </form>
 
         <section>
@@ -34,6 +34,38 @@
             <button id="resetBtn" class="reset__button">Reset</button>
         </section>
     </header>
+
+    <aside>
+        <details>
+            <summary>Add your own book</summary>
+
+            <form id="addBookForm" class="addBook__container">
+                <label for="addTitle">
+                    <input id="addTitle" type="text" class="addBook__input" name="addBook"
+                        placeholder="Type in the title" required>
+                </label>
+                <label for="addAuthor">
+                    <input id="addAuthor" type="text" class="addBook__input" name="addBook"
+                        placeholder="Type in the author" required>
+                </label>
+                <label for="addYear">
+                    <input id="addYear" type="text" class="addBook__input" name="addBook"
+                        placeholder="Type in the year of release" required>
+                </label>
+                <label for="addCat">
+                    <input id="addCat" type="text" class="addBook__input" name="addBook"
+                        placeholder="Type in the category" required>
+                </label>
+                <label for="addImg">
+                    <input id="addImg" type="text" class="addBook__input" name="addBook"
+                        placeholder="Paste the url of the cover" required>
+                </label>
+                <p id="warning-add" class="warning display-n">Type at least 3 letters</p>
+            </form>
+
+            <button id="addBookBtn" class="addBook__button">Submit</button>
+        </details>
+    </aside>
 
     <aside>
         <h2>Browse by</h2>

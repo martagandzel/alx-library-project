@@ -244,32 +244,33 @@ const listOfBooks = [
 
 // catching elements
 const library = document.querySelector('#library');
-const form = document.querySelector('#searchForm');
-const input = document.querySelector('#searchInput');
+const searchForm = document.querySelector('#searchForm');
+const searchInput = document.querySelector('#search');
 const searchBtn = document.querySelector('#searchBtn');
 const resetBtn = document.querySelector('#resetBtn');
 const alphBtn = document.querySelector('#alph');
 const chronBtn = document.querySelector('#chron');
 const catBtn = document.querySelector('#cat');
-const displayNone = document.querySelector('.display-n')
+const displayNoneSearch = document.querySelector('#warning-search')
+const displayNoneAdd = document.querySelector('#warning-add')
 
+// for adding a new book to local storage
+const listOfInputs = document.querySelectorAll('#addBookForm input');
+const addTitleInput = document.querySelector('#addTitle');
+const addAuthorInput = document.querySelector('#addAuthor');
+const addYearInput = document.querySelector('#addYear');
+const addCatInput = document.querySelector('#addCat');
+const addImgInput = document.querySelector('#addImg');
+const addBookBtn = document.querySelector('#addBookBtn');
 
-// creating copies of the db before sorting
-// Is there any better way of avoiding destructiveness of sort()? Or is copying into new arrays fine?
-const alphabeticalOrder = listOfBooks.slice();
-const sortedlistOfBooks = listOfBooks.slice();
-const listOfBooksByCat = listOfBooks.slice();
+// sorting collections by a given key
+const sortBy = (collection, key) => collection.sort((a, b) => a[key] > b[key] ? 1 : -1)
 
-// sorting listOfBooks by year of release, title and category
-alphabeticalOrder.sort((a, b) => a.title > b.title ? 1 : -1);
-sortedlistOfBooks.sort((a, b) => a.year > b.year ? 1 : -1);
-listOfBooksByCat.sort((a, b) => a.category > b.category ? 1 : -1)
+// validating searchInput
+const validateInput = input => input.value.length > 2;
 
-// validating input
-
-const validateInput = () => {
-    return input.value.length > 2;
-}
+// getting the collection from localStorage
+const storedLibrary = localStorage.getItem('Library');
 
 // showing the library by any collection
 const showLibrary = (collection) => {
@@ -290,42 +291,81 @@ const showLibrary = (collection) => {
     })
 }
 
-// reading and validating input, then filtering the library view
+// reseting the searchInput and warning message
+const handleReset = () => {
+    searchInput.value = '';
+    displayNoneSearch.classList.add('display-n');
+}
+
+// showing the library for the 1st time
+if (localStorage.getItem('Library')) {
+    showLibrary(JSON.parse(storedLibrary));
+
+} else {
+    showLibrary(listOfBooks);
+    localStorage.setItem('Library', JSON.stringify(listOfBooks))
+}
+
+// reading and validating searchInput, then filtering the library view
 const handleSearch = (event) => {
     event.preventDefault();
-
-    const isValid = validateInput();
+    const isValid = validateInput(searchInput);
     if (!isValid) {
-        displayNone.classList.remove('display-n');
+        displayNoneSearch.classList.remove('display-n');
+        return
+    }
+    const filteredBooks = JSON.parse(storedLibrary).filter(book => book.title.toLowerCase().includes(searchInput.value.toLowerCase()))
+    showLibrary(filteredBooks);
+    handleReset();
+}
+
+const clearInputs = () => {
+    listOfInputs.forEach(input => input.value = '')
+}
+
+// adding book to the local storage and presenting it on the website
+const handleAddingBook = (event) => {
+    event.preventDefault();
+    const isValid = [...listOfInputs].map(input => validateInput(input)).filter(item => item === false);
+    if (isValid.length !== 0) {
+        displayNoneAdd.classList.remove('display-n');
         return
     }
 
-    const filteredBooks = listOfBooks.filter(book => book.title.toLowerCase().includes(input.value.toLowerCase()))
+    const newBook =
+    {
+        title: addTitleInput.value,
+        author: addAuthorInput.value,
+        year: addYearInput.value,
+        category: `${addCatInput.value.toLowerCase()}`,
+        image: addImgInput.value,
+        alt: `Cover for ${addTitleInput.value}`,
+    }
 
-    showLibrary(filteredBooks);
-
-    input.value = '';
-    displayNone.classList.add('display-n');
+    localStorage.setItem('Library', JSON.stringify(JSON.parse(storedLibrary).concat(newBook)))
+    clearInputs();
+    displayNoneAdd.classList.add('display-n');
+    showLibrary(JSON.parse(storedLibrary))
 }
 
-// adding event to the search and reset input and buttons
-form.addEventListener('submit', handleSearch)
+// adding event to the search and reset searchInput and buttons
+searchForm.addEventListener('submit', handleSearch)
 searchBtn.addEventListener('click', handleSearch)
 resetBtn.addEventListener('click', () => {
-    showLibrary(listOfBooks);
-    displayNone.classList.add('display-n');
+    showLibrary(JSON.parse(storedLibrary));
+    handleReset();
 })
+
+// adding event to the addBook form and button
+addBookBtn.addEventListener('click', handleAddingBook)
 
 // adding events to the category buttons
 alphBtn.addEventListener('click', () => {
-    showLibrary(alphabeticalOrder)
+    showLibrary(sortBy(JSON.parse(storedLibrary), 'title'))
 })
 chronBtn.addEventListener('click', () => {
-    showLibrary(sortedlistOfBooks)
+    showLibrary(sortBy(JSON.parse(storedLibrary), 'year'))
 })
 catBtn.addEventListener('click', () => {
-    showLibrary(listOfBooksByCat)
+    showLibrary(sortBy(JSON.parse(storedLibrary), 'category'))
 })
-
-// showing the library for the 1st time
-showLibrary(listOfBooks);

@@ -17,6 +17,12 @@ h2 {
     padding: 2rem 0;
 }
 
+summary {
+    font-size: 2rem;
+    padding: 2rem 0;
+    font-weight: 600;
+}
+
 .header__container {
     display: flex;
     justify-content: space-between;
@@ -44,7 +50,8 @@ h2 {
 }
 
 .search__button,
-.reset__button {
+.reset__button,
+.addBook__button {
     background-color: #fff;
     width: 7rem;
     padding: 1rem;
@@ -61,6 +68,20 @@ h2 {
 
 .display-n {
     display: none;
+}
+
+.addBook__container {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.addBook__input {
+    background-color: #fff;
+    padding: 1rem;
+    margin: .5rem 0;
+    border: 1px solid #c0c0c0;
+    font-family: inherit;
+    font-size: 1.25rem;
 }
 
 .category__container {

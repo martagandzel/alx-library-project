@@ -270,7 +270,7 @@ const sortBy = (collection, key) => collection.sort((a, b) => a[key] > b[key] ? 
 const validateInput = input => input.value.length > 2;
 
 // getting the collection from localStorage
-const storedLibrary = localStorage.getItem('Library');
+let storedLibrary = localStorage.getItem('Library');;
 
 // showing the library by any collection
 const showLibrary = (collection) => {
@@ -295,15 +295,6 @@ const showLibrary = (collection) => {
 const handleReset = () => {
     searchInput.value = '';
     displayNoneSearch.classList.add('display-n');
-}
-
-// showing the library for the 1st time
-if (localStorage.getItem('Library')) {
-    showLibrary(JSON.parse(storedLibrary));
-
-} else {
-    showLibrary(listOfBooks);
-    localStorage.setItem('Library', JSON.stringify(listOfBooks))
 }
 
 // reading and validating searchInput, then filtering the library view
@@ -369,3 +360,13 @@ chronBtn.addEventListener('click', () => {
 catBtn.addEventListener('click', () => {
     showLibrary(sortBy(JSON.parse(storedLibrary), 'category'))
 })
+
+// showing the library for the 1st time
+if (localStorage.getItem('Library')) {
+    showLibrary(JSON.parse(storedLibrary));
+
+} else {
+    showLibrary(listOfBooks);
+    localStorage.setItem('Library', JSON.stringify(listOfBooks))
+    storedLibrary = localStorage.getItem('Library');
+}

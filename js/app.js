@@ -73,12 +73,12 @@ const listOfBooks = [
         alt: "Cover for The Savage Earth",
     },
     {
-        title: "The Savage Night",
+        title: "Woman in Cabin 10",
         author: "P.T. Hylton, Jonathan Benecke",
-        year: "2018",
-        category: "si-fi",
-        image: "../img/vw1.jpg",
-        alt: "Cover for The Savage Night",
+        year: "2016",
+        category: "mystery",
+        image: "../img/wic10.jpg",
+        alt: "Cover for Woman in Cabin 10",
     },
     {
         title: "The Hunger Games",

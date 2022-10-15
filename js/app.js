@@ -270,7 +270,7 @@ const sortBy = (collection, key) => collection.sort((a, b) => a[key] > b[key] ? 
 const validateInput = input => input.value.length > 2;
 
 // getting the collection from localStorage
-let storedLibrary = localStorage.getItem('Library');;
+let storedLibrary = JSON.parse(localStorage.getItem('Library' ?? []));
 
 // showing the library by any collection
 const showLibrary = (collection) => {
@@ -305,7 +305,7 @@ const handleSearch = (event) => {
         displayNoneSearch.classList.remove('display-n');
         return
     }
-    const filteredBooks = JSON.parse(storedLibrary).filter(book => book.title.toLowerCase().includes(searchInput.value.toLowerCase()))
+    const filteredBooks = storedLibrary.filter(book => book.title.toLowerCase().includes(searchInput.value.toLowerCase()))
     showLibrary(filteredBooks);
     handleReset();
 }
@@ -333,37 +333,38 @@ const handleAddingBook = (event) => {
         alt: `Cover for ${addTitleInput.value}`,
     }
 
-    localStorage.setItem('Library', JSON.stringify(JSON.parse(storedLibrary).concat(newBook)))
+    const newBookLibrary = storedLibrary.concat(newBook);
+    localStorage.setItem('Library', JSON.stringify(newBookLibrary));
+    showLibrary(newBookLibrary);
+
     clearInputs();
     displayNoneAdd.classList.add('display-n');
-    showLibrary(JSON.parse(storedLibrary))
 }
 
 // adding event to the search and reset searchInput and buttons
 searchForm.addEventListener('submit', handleSearch)
 searchBtn.addEventListener('click', handleSearch)
 resetBtn.addEventListener('click', () => {
-    showLibrary(JSON.parse(storedLibrary));
+    showLibrary(storedLibrary);
     handleReset();
 })
 
 // adding event to the addBook form and button
 addBookBtn.addEventListener('click', handleAddingBook)
-
 // adding events to the category buttons
 alphBtn.addEventListener('click', () => {
-    showLibrary(sortBy(JSON.parse(storedLibrary), 'title'))
+    showLibrary(sortBy(storedLibrary, 'title'))
 })
 chronBtn.addEventListener('click', () => {
-    showLibrary(sortBy(JSON.parse(storedLibrary), 'year'))
+    showLibrary(sortBy(storedLibrary, 'year'))
 })
 catBtn.addEventListener('click', () => {
-    showLibrary(sortBy(JSON.parse(storedLibrary), 'category'))
+    showLibrary(sortBy(storedLibrary, 'category'))
 })
 
 // showing the library for the 1st time
 if (localStorage.getItem('Library')) {
-    showLibrary(JSON.parse(storedLibrary));
+    showLibrary(storedLibrary);
 
 } else {
     showLibrary(listOfBooks);
